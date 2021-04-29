@@ -72,7 +72,5 @@ export const useAnalytics = () => {
     throw new Error('useAnalytics must be used within a AnalyticsProvider');
   }
 
-  // return memoized analytics object, so you can use it in e.g.
-  // useEffect without having to include it in the dependency array.
-  return useDeepCompareMemo(() => context.analytics, [context.analytics]);
+  return context.analytics
 };
