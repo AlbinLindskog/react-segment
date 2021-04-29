@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from 'react';
-import { useScript } from 'react-hooks';
+import { useScript, useDeepCompareMemo } from 'react-hooks';
 
 
 // The analytics script is loaded asynchronously, so we define this stub analytics object
@@ -72,5 +72,7 @@ export const useAnalytics = () => {
     throw new Error('useAnalytics must be used within a AnalyticsProvider');
   }
 
-  return context;
+  // return memoized analytics object, so you can use it in e.g.
+  // useEffect without having to include it in the dependency array.
+  return useDeepCompareMemo(() => context.analytics, [context.analytics]);
 };

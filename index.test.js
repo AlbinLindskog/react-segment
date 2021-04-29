@@ -19,12 +19,13 @@ test('Stub analytics until loaded', () => {
   const wrapper = ({ children }) => <AnalyticsProvider writeKey="hejsvejs">{children}</AnalyticsProvider>
   const { result } = renderHook(() => useAnalytics(), { wrapper });
 
+
   // Log an event, should not fail, even if the analytics can't load.
   act(() => {
-    result.current.analytics.identify(12, {userName: "Test McTest"})
+    result.current.identify(12, {userName: "Test McTest"})
   });
 
   // And the event should be logged, ready to be picked up later.
-  expect(result.current.analytics[0]).toStrictEqual([ 'identify', 12, { userName: 'Test McTest' } ])
+  expect(result.current[0]).toStrictEqual([ 'identify', 12, { userName: 'Test McTest' } ])
 });
 

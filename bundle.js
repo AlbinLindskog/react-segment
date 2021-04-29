@@ -122,9 +122,13 @@ var useAnalytics = function useAnalytics() {
 
   if (context === undefined) {
     throw new Error('useAnalytics must be used within a AnalyticsProvider');
-  }
+  } // return memoized analytics object, so you can use it as a dependency in e.g.
+  // useEffect without having to include it in the dependency array.
 
-  return context;
+
+  return reactHooks.useDeepCompareMemo(function () {
+    return context.analytics;
+  }, [context.analytics]);
 };
 
 exports.AnalyticsContext = AnalyticsContext;
