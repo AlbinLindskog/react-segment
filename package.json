@@ -2,9 +2,10 @@
   "name": "react-segment",
   "version": "1.0.0",
   "description": "Segment.io integration for React.js",
-  "main": "index.js",
+  "main": "bundle.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -18,12 +19,14 @@
   "devDependencies": {
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "7.12.13",
+    "@rollup/plugin-babel": "^5.3.0",
     "@testing-library/react-hooks": "^3.7.0",
     "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
     "react": "^16.14.0",
     "react-dom": "^16.8.6",
-    "react-test-renderer": "^16.14.0"
+    "react-test-renderer": "^16.14.0",
+    "rollup": "^2.46.0"
   },
   "peerDependencies": {
     "react": "^16.8.6",
