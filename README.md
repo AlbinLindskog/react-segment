@@ -4,6 +4,8 @@ The Segment.io Javascript snippet is meant for a wide variety of JavaScript apps
 a single-page app framework like React. Although the official tutorial works, this is library makes the integration far
 more seamless.
 
+Note: This package does not work for Analytics.js 2.0, it only works for Analytics.js Classic.
+
 Simply add the `AnalyticsProvider` to you app with your write key:
 ```javascript
 import { AnalyticsProvider } from './index.js'
