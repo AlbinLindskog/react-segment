@@ -18,7 +18,7 @@ function _arrayWithHoles(arr) {
 }
 
 function _iterableToArrayLimit(arr, i) {
-  var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]);
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
 
   if (_i == null) return;
   var _arr = [];
@@ -104,11 +104,15 @@ var AnalyticsProvider = function AnalyticsProvider(_ref) {
       setAnalytics = _useState2[1];
 
   var onLoad = function onLoad() {
-    return setAnalytics(window.analytics);
+    // The event still fires, even if the download was blocked by an extension, so we need to check
+    // that the analytics was actually mounted.
+    if (window.analytics) {
+      setAnalytics(window.analytics);
+    }
   };
 
   reactHooks.useScript("https://cdn.segment.com/analytics.js/v1/" + writeKey + "/analytics.min.js", onLoad);
-  return /*#__PURE__*/React__default['default'].createElement(AnalyticsContext.Provider, {
+  return /*#__PURE__*/React__default["default"].createElement(AnalyticsContext.Provider, {
     value: {
       analytics: analytics
     }

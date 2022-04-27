@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext } from 'react';
-import { useScript, useDeepCompareMemo } from 'react-hooks';
+import { useScript } from 'react-hooks';
 
 
 // The analytics script is loaded asynchronously, so we define this stub analytics object
@@ -51,7 +51,13 @@ export const AnalyticsProvider = ({ writeKey, children }) => {
     the page head, and creates a context with the analytics object,
   */
   const [analytics, setAnalytics] = useState(stubAnalytics)
-  const onLoad = () => setAnalytics(window.analytics)
+  const onLoad = () => {
+    // The event still fires, even if the download was blocked by an extension, so we need to check
+    // that the analytics was actually mounted.
+    if (window.analytics) {
+      setAnalytics(window.analytics)
+    }
+  }
   useScript("https://cdn.segment.com/analytics.js/v1/" + writeKey + "/analytics.min.js", onLoad);
 
   return (
